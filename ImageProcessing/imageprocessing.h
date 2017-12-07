@@ -3,8 +3,11 @@
 
 #include <QtWidgets>
 #include "ui_imageprocessing.h"
+#include "imagefusion.h"
+
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 class ImageProcessing : public QMainWindow
 {
@@ -16,15 +19,15 @@ public:
 
 	void saveData( QString path );
 
-	QImage cvMat2QImage( const cv::Mat &mat );
-	cv::Mat QImage2cvMat( QImage image );
+	//QImage cvMat2QImage( const cv::Mat &mat );
+	//cv::Mat QImage2cvMat( QImage image );
 
 	void splitShowImage( cv::Mat mat );
 
 signals:
 	void showImage( QImage image );
 
-	public slots:
+public slots:
 	void openImage( );
 
 	void updateImage( QImage image );
@@ -46,8 +49,12 @@ signals:
 	void toShowGreenImage( bool showGreen );
 	void toShowBlueImage( bool showBlue );
 
+	void fusion();
+
 private:
 	Ui::ImageProcessingClass ui;
+
+	imageFusion imageconvert;
 
 	QString openPath;
 	QPixmap Opixmap;

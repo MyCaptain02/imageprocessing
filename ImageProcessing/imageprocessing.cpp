@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <iostream>
 
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
+//#include <opencv2/highgui/highgui.hpp>
+//#include <opencv2/core/core.hpp>
+//#include <opencv2/imgproc/imgproc.hpp>
 
 ImageProcessing::ImageProcessing( QWidget *parent )
 : QMainWindow( parent ),
@@ -35,6 +35,8 @@ thresholdValue( 128 )
 	connect( ui.redShowButton, &QRadioButton::toggled, this, &ImageProcessing::toShowRedImage );
 	connect( ui.greenShowButton, &QRadioButton::toggled, this, &ImageProcessing::toShowGreenImage );
 	connect( ui.blueShowButton, &QRadioButton::toggled, this, &ImageProcessing::toShowBlueImage );
+
+	connect( ui.imageFusionButton, &QPushButton::clicked, this, &ImageProcessing::fusion);
 }
 
 ImageProcessing::~ImageProcessing( )
@@ -182,7 +184,7 @@ void ImageProcessing::openImage( )
 	merge( channels, hisImage );
 	*/
 
-	QImage hImage = cvMat2QImage( hisImage );
+	QImage hImage = imageconvert.cvMat2QImage( hisImage );
 
 	//int h = hImage.height();
 	//int w = hImage.width();
@@ -307,7 +309,7 @@ void ImageProcessing::updateImage( QImage image )
 
 	}
 
-	QImage hImage = cvMat2QImage( hisImage );
+	QImage hImage = imageconvert.cvMat2QImage( hisImage );
 
 
 	ui.histogramShowlabel->setPixmap( QPixmap::fromImage( hImage ) );
@@ -1110,6 +1112,7 @@ void ImageProcessing::GaussianFilter( )
 	emit showImage( *fImage );
 }
 
+/*
 QImage ImageProcessing::cvMat2QImage( const cv::Mat& mat )
 {
 	// 8-bits unsigned, NO. OF CHANNELS = 1  
@@ -1190,11 +1193,11 @@ cv::Mat ImageProcessing::QImage2cvMat( QImage image )
 
 	return mat;
 }
-
+*/
 
 void ImageProcessing::splitShow( )
 {
-	cv::Mat mat = QImage2cvMat( image );
+	cv::Mat mat = imageconvert.QImage2cvMat( image );
 
 	std::vector<cv::Mat> channels;
 
@@ -1261,10 +1264,17 @@ void ImageProcessing::toShowBlueImage( bool showBlue )
 void ImageProcessing::splitShowImage( cv::Mat mat )
 {
 
-	QImage image = cvMat2QImage( mat );
+	QImage image = imageconvert.cvMat2QImage( mat );
 
 	//ui.showLabel->setPixmap( QPixmap::fromImage( image ) );
 
 	emit showImage( image );
 
+}
+
+void ImageProcessing::fusion()
+{
+	imageFusion dialog;
+
+	dialog.exec();
 }

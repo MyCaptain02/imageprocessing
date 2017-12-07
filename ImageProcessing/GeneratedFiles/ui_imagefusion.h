@@ -36,24 +36,27 @@ public:
     {
         if (imageFusion->objectName().isEmpty())
             imageFusion->setObjectName(QStringLiteral("imageFusion"));
-        imageFusion->resize(1344, 734);
+        imageFusion->resize(1332, 620);
+        imageFusion->setSizeGripEnabled(false);
+        imageFusion->setModal(false);
         loadImageButton = new QPushButton(imageFusion);
         loadImageButton->setObjectName(QStringLiteral("loadImageButton"));
         loadImageButton->setGeometry(QRect(170, 10, 91, 41));
         frame = new QFrame(imageFusion);
         frame->setObjectName(QStringLiteral("frame"));
-        frame->setGeometry(QRect(9, 69, 1321, 511));
+        frame->setGeometry(QRect(10, 60, 1311, 481));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
         imageListShowlabel = new QLabel(frame);
         imageListShowlabel->setObjectName(QStringLiteral("imageListShowlabel"));
-        imageListShowlabel->setGeometry(QRect(9, 20, 640, 480));
+        imageListShowlabel->setGeometry(QRect(0, 0, 640, 480));
         imageFusionShowlabel = new QLabel(frame);
         imageFusionShowlabel->setObjectName(QStringLiteral("imageFusionShowlabel"));
-        imageFusionShowlabel->setGeometry(QRect(670, 20, 640, 480));
+        imageFusionShowlabel->setGeometry(QRect(670, 0, 640, 480));
         listImage = new QListWidget(imageFusion);
         listImage->setObjectName(QStringLiteral("listImage"));
-        listImage->setGeometry(QRect(10, 580, 651, 151));
+        listImage->setGeometry(QRect(10, 550, 641, 61));
+        listImage->setFlow(QListView::LeftToRight);
         imageFusionButton = new QPushButton(imageFusion);
         imageFusionButton->setObjectName(QStringLiteral("imageFusionButton"));
         imageFusionButton->setGeometry(QRect(630, 20, 61, 31));
@@ -65,7 +68,7 @@ public:
 
     void retranslateUi(QDialog *imageFusion)
     {
-        imageFusion->setWindowTitle(QApplication::translate("imageFusion", "imageFusion", 0));
+        imageFusion->setWindowTitle(QApplication::translate("imageFusion", "\345\233\276\345\203\217\350\236\215\345\220\210", 0));
         loadImageButton->setText(QApplication::translate("imageFusion", "\350\275\275\345\205\245\345\233\276\347\211\207", 0));
         imageListShowlabel->setText(QApplication::translate("imageFusion", "                                                \346\230\276\347\244\272\345\233\276\347\211\207\351\233\206", 0));
         imageFusionShowlabel->setText(QApplication::translate("imageFusion", "                                                 \346\230\276\347\244\272\345\220\210\346\210\220\345\233\276\345\203\217", 0));
